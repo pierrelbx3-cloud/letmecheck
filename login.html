@@ -1,1 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-R">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMC - Log In</title>
+    <style>
+        /* --- General Styles (Reprise de index.html) --- */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9; /* Léger fond pour le corps */
+        }
 
+        /* --- 1. Navigation Header (Reprise de index.html) --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e0e0e0;
+            background-color: #ffffff;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        nav a:hover {
+            color: #466E82;
+        }
+        
+        /* Les boutons dans l'en-tête de la page de connexion ne sont plus nécessaires, mais je les garde pour la cohérence */
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+            margin-left: 25px;
+        }
+        
+        .btn {
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none; /* Ajouté pour les liens stylisés en bouton */
+            display: inline-block; /* Ajouté pour que les <a> se comportent comme des boutons */
+            text-align: center;
+        }
+
+        .btn-login {
+            background-color: transparent;
+            border: 1px solid #466E82;
+            color: #466E82;
+        }
+
+        .btn-trial {
+            background-color: #466E82;
+            color: white;
+        }
+
+
+        /* --- Styles Spécifiques au Formulaire de Connexion --- */
+
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh; /* S'assure que le formulaire est au centre verticalement */
+            padding: 2rem;
+        }
+
+        .login-box {
+            background-color: #ffffff;
+            padding: 3rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px; /* Taille maximale pour un formulaire simple */
+            text-align: center;
+        }
+
+        .login-box h2 {
+            font-size: 2rem;
+            color: #223E50;
+            margin-bottom: 2rem;
+            border-bottom: 3px solid #466E82;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .input-group input[type="email"],
+        .input-group input[type="password"] {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box; /* S'assure que le padding n'augmente pas la largeur */
+            font-size: 1rem;
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 1rem;
+            background-color: #466E82;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .btn-submit:hover {
+            background-color: #223E50; /* Changement de couleur au survol */
+        }
+
+        .forgot-link {
+            display: block;
+            margin-top: 1.5rem;
+            color: #466E82;
+            text-decoration: none;
+            font-size: 0.95rem;
+        }
+
+        /* --- Footer (Reprise de index.html) --- */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #223E50;
+            color: #f0f0f0;
+            border-top: 1px solid #466E82;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            LMC
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="customer.html">For Customer</a></li>
+                <li><a href="mro.html">For MRO</a></li>
+                <li><a href="index.html">Platform</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-buttons">
+            <a href="index.html" class="btn btn-login">Home</a> 
+            <a href="contact.html" class="btn btn-trial">Request trial</a> 
+        </div>
+    </header>
+
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Access Account</h2>
+            
+            <form action="/login" method="POST"> <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <button type="submit" class="btn-submit">Log In</button>
+            </form>
+            
+            <a href="#" class="forgot-link">Forgot your password?</a>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 LMC. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
