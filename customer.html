@@ -1,1 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-R">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMC - For Customers: Find MRO Excellence</title>
+    <style>
+        /* --- General Styles (Reprise de index.html) --- */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9; 
+        }
 
+        /* --- 1. Navigation Header (Reprise de index.html) --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e0e0e0;
+            background-color: #ffffff;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        nav a:hover {
+            color: #466E82;
+        }
+        
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+            margin-left: 25px;
+        }
+        
+        .btn {
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none; 
+            display: inline-block; 
+            text-align: center;
+        }
+
+        .btn-login {
+            background-color: transparent;
+            border: 1px solid #466E82;
+            color: #466E82;
+        }
+
+        .btn-trial {
+            background-color: #466E82;
+            color: white;
+        }
+        
+        /* --- Hero Section Spécifique --- */
+        .customer-hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 5rem 2rem;
+            background-color: #466E82; /* Utilisation du bleu clair pour le client */
+            color: #ffffff; 
+        }
+
+        .customer-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .customer-hero p {
+            font-size: 1.3rem;
+            color: #f0f0f0;
+            margin-bottom: 2rem;
+        }
+        
+        /* --- Main Content Layout --- */
+        .content-section {
+            padding: 4rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .content-section h2 {
+            text-align: center;
+            font-size: 2.2rem;
+            color: #223E50;
+            margin-bottom: 3rem;
+        }
+
+        /* --- Step Boxes (Comment ça marche) --- */
+        .step-grid {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .step-box {
+            flex-basis: calc(33% - 20px); 
+            min-width: 250px;
+            background-color: #ffffff;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 5px solid #223E50; /* Bordure foncée pour le client */
+        }
+        
+        .step-box .number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #466E82;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .step-box h3 {
+            color: #223E50;
+            font-size: 1.4rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+        
+        /* --- Image/Text Block (Reprise de mro.html) --- */
+        .image-text-block {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            margin-bottom: 4rem;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+        }
+        
+        .image-text-block:nth-child(even) {
+            flex-direction: row-reverse; 
+        }
+
+        .image-text-block .text-content {
+            flex: 1;
+        }
+        
+        .image-text-block .image-placeholder {
+            flex: 1;
+            min-width: 250px;
+        }
+        
+        .image-placeholder img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .text-content h3 {
+            color: #223E50;
+            font-size: 1.6rem;
+            border-left: 4px solid #466E82;
+            padding-left: 15px;
+            margin-top: 0;
+        }
+
+        /* --- Footer (Reprise de index.html) --- */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #223E50;
+            color: #f0f0f0;
+            border-top: 1px solid #466E82;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            LMC
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="customer.html">For Customer</a></li> <li><a href="mro.html">For MRO</a></li>
+                <li><a href="index.html">Platform</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="header-buttons">
+            <a href="login.html" class="btn btn-login">Log in</a>
+            <a href="contact.html" class="btn btn-trial">Request trial</a> 
+        </div>
+    </header>
+
+    <section class="customer-hero">
+        <h1>Sourcing MRO simplifié, performance garantie</h1>
+        <p>Trouvez rapidement la pièce ou le service dont votre flotte a besoin, auprès de fournisseurs certifiés.</p>
+        <a href="#workflow" class="btn btn-trial" style="background-color: white; color: #466E82;">Voir le processus</a>
+    </section>
+
+    <div class="content-section" id="workflow">
+        <h2>Comment trouver ce dont vous avez besoin en 3 étapes</h2>
+        <div class="step-grid">
+            
+            <div class="step-box">
+                <span class="number">1</span>
+                <h3>Recherchez et Spécifiez</h3>
+                <p>Utilisez notre moteur de recherche intelligent pour entrer les références exactes (part numbers) ou décrire le service MRO requis.</p>
+            </div>
+            
+            <div class="step-box">
+                <span class="number">2</span>
+                <h3>Comparez les Offres</h3>
+                <p>Recevez instantanément des devis de fournisseurs MRO qualifiés. Comparez les prix, les délais et les certifications sur une interface unique.</p>
+            </div>
+            
+            <div class="step-box">
+                <span class="number">3</span>
+                <h3>Commandez en Confiance</h3>
+                <p>Validez votre commande. Notre plateforme sécurisée gère le suivi, la logistique et la documentation jusqu'à la livraison.</p>
+            </div>
+            
+        </div>
+    </div>
+    
+    <div class="content-section" style="padding-top: 1rem;">
+        
+        <div class="image-text-block">
+            <div class="text-content">
+                <h3>Efficacité de Sourcing Maximale</h3>
+                <p>Fini la recherche manuelle auprès de multiples contacts. Notre réseau qualifié de fournisseurs MRO vous donne accès à une disponibilité globale en un seul clic, réduisant les AOG (Aircraft On Ground).</p>
+                <ul>
+                    <li>Accès à des milliers de références en temps réel.</li>
+                    <li>Réponse rapide aux devis critiques.</li>
+                    <li>Réduction du temps de cycle d'approvisionnement.</li>
+                </ul>
+            </div>
+            <div class="image-placeholder">
+                <img src="letmecheck/images/A340.jpeg" alt="Sourcing Efficiency Illustration">
+            </div>
+        </div>
+        
+        <div class="image-text-block">
+            <div class="text-content">
+                <h3>Qualité et Conformité Assurées</h3>
+                <p>Ne traitez qu'avec des MROs dont les certifications sont vérifiées (FAA, EASA, AS9100, etc.). Chaque transaction est tracée pour une conformité totale.</p>
+                <ul>
+                    <li>Filtrez les résultats par certification requise.</li>
+                    <li>Avis et notations des autres opérateurs.</li>
+                    <li>Documentation complète des pièces (Ex: Form 8130, CoC).</li>
+                </ul>
+            </div>
+            <div class="image-placeholder">
+                <img src="letmecheck/images/A340.jpeg" alt="Quality Assurance Graphic">
+            </div>
+        </div>
+        
+    </div>
+    
+    <div class="cta-banner" style="background-color: #223E50; margin-top: 0;">
+        <h2>Prêt à optimiser votre maintenance ?</h2>
+        <a href="contact.html">Commencer un essai gratuit</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 LMC. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
