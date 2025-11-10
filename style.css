@@ -1,1 +1,138 @@
+/* --- 0. General Styles --- */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #f4f4f9; /* Défini sur les pages internes */
+}
 
+/* --- 1. Navigation Header & Layout --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #ffffff;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #007bff;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+nav a:hover {
+    color: #466E82; /* Votre couleur primaire */
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+    margin-left: 25px;
+}
+
+/* --- 2. Buttons (Générique) --- */
+.btn {
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none; 
+    display: inline-block; 
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.btn-login {
+    background-color: transparent;
+    border: 1px solid #466E82;
+    color: #466E82;
+}
+
+.btn-trial {
+    background-color: #466E82;
+    color: white;
+}
+
+.btn-trial:hover, .btn-send:hover, .btn-execute:hover { /* S'assurer du survol partout */
+    background-color: #223E50;
+}
+
+/* --- 3. Hero Sections (Spécifiques, à adapter pour votre index) --- */
+.hero { /* Pour index.html */
+    /* Styles pour le fond bleu clair de la page d'accueil */
+    background-color: #466E82; 
+    color: #ffffff;
+    /* ... autres styles de mise en page ... */
+}
+
+.mro-hero { /* Pour mro.html */
+    /* Styles pour le fond bleu foncé de la page MRO */
+    background-color: #223E50;
+    color: #ffffff;
+    /* ... autres styles de mise en page ... */
+}
+
+.customer-hero { /* Pour customer.html */
+    /* Styles pour le fond bleu clair de la page Client */
+    background-color: #466E82; 
+    color: #ffffff;
+    /* ... autres styles de mise en page ... */
+}
+
+/* --- 4. Content Layouts (pour les sections internes) --- */
+.content-section {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- 5. Info/Feature Boxes (Réutilisables) --- */
+.info-box, .feature-box, .login-box, .contact-form-box, .info-box-contact {
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    /* ... styles de flexbox ou de base ... */
+}
+/* ... Ajoutez toutes les classes spécifiques de boxes ici ... */
+
+/* --- 6. Form elements (Réutilisables) --- */
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.input-group input, .input-group textarea {
+    /* Styles pour les champs de texte */
+}
+
+/* --- 7. Footer --- */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: #223E50; /* Votre couleur secondaire */
+    color: #f0f0f0;
+    border-top: 1px solid #466E82; 
+    margin-top: 2rem;
+}
