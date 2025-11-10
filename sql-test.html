@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-R">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LMC - SQL Query Tester</title>
+    
+    <style>
+        /* --- General Styles (Reprise de index.html) --- */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f4f4f9; 
+        }
+
+        /* --- 1. Navigation Header (Reprise de index.html) --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #e0e0e0;
+            background-color: #ffffff;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #555;
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        nav a:hover {
+            color: #466E82;
+        }
+        
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+            margin-left: 25px;
+        }
+        
+        .btn {
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none; 
+            display: inline-block; 
+            text-align: center;
+        }
+
+        .btn-login {
+            background-color: transparent;
+            border: 1px solid #466E82;
+            color: #466E82;
+        }
+
+        .btn-trial {
+            background-color: #466E82;
+            color: white;
+        }
+        
+        /* --- Styles Spécifiques au Testeur SQL --- */
+        .query-tester-container {
+            max-width: 1000px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .query-tester-container h2 {
+            font-size: 2rem;
+            color: #223E50;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid #466E82;
+            padding-bottom: 0.5rem;
+        }
+
+        label[for="sql-query"] {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        /* Zone de texte pour la requête */
+        #sql-query {
+            width: 100%;
+            height: 150px;
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace; /* Police monospace pour le code */
+            font-size: 0.9rem;
+            resize: vertical;
+        }
+
+        /* Bouton d'exécution */
+        .btn-execute {
+            padding: 1rem 2rem;
+            background-color: #466E82;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .btn-execute:hover {
+            background-color: #223E50;
+        }
+
+        /* Zone de résultats */
+        #results-area {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            border: 1px solid #e0e0e0;
+            background-color: #f9f9f9;
+            border-radius: 5px;
+        }
+
+        #results-area h3 {
+            color: #223E50;
+            margin-top: 0;
+            margin-bottom: 1rem;
+        }
+
+        #results-output {
+            white-space: pre-wrap; /* Conserve le formatage JSON */
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            max-height: 400px;
+            overflow-y: auto; /* Scrollbar si les résultats sont longs */
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+        }
+        
+        /* Message d'erreur */
+        .error-message {
+            color: #cc0000;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        /* --- Footer (Reprise de index.html) --- */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: #223E50;
+            color: #f0f0f0;
+            border-top: 1px solid #466E82;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            LMC
+        </div>
+        
+        <nav>
+            <ul>
+                <li><a href="customer.html">For Customer</a></li>
+                <li><a href="mro.html">For MRO</a></li>
+                <li><a href="index.html">Platform</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="sql-test.html" style="color: #466E82;">SQL Test</a></li> 
+            </ul>
+        </nav>
+
+        <div class="header-buttons">
+            <a href="login.html" class="btn btn-login">Log in</a>
+            <a href="contact.html" class="btn btn-trial">Request trial</a> 
+        </div>
+    </header>
+
+    <div class="query-tester-container">
+        <h2>Supabase SQL Query Tester</h2>
+        
+        <form id="query-form">
+            <label for="sql-query">Enter SQL Query (Postgres/Supabase):</label>
+            <textarea id="sql-query" placeholder="Ex: SELECT * FROM your_table WHERE id = 1;"></textarea>
+            
+            <button type="submit" class="btn-execute">Execute Query</button>
+        </form>
+        
+        <div id="results-area">
+            <h3>Results</h3>
+            <div id="error-display" class="error-message" style="display: none;"></div>
+            <pre id="results-output">
+[ Waiting for execution... ]
+            </pre>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 LMC. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // *** Démarrage du script pour Supabase ***
+        
+        // 1. Configuration (Anticipation de vos contraintes)
+        // Vous aurez besoin de votre URL de projet et de votre clé publique (Anon Key)
+        const SUPABASE_URL = 'VOTRE_URL_SUPABASE'; // À remplacer !
+        const SUPABASE_ANON_KEY = 'VOTRE_CLE_PUBLIQUE_ANON'; // À remplacer !
+
+        // 2. Initialisation du client Supabase
+        // const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+        // La ligne ci-dessus sera fonctionnelle après l'importation du CDN (Étape 1)
+
+        const form = document.getElementById('query-form');
+        const queryTextarea = document.getElementById('sql-query');
+        const resultsOutput = document.getElementById('results-output');
+        const errorDisplay = document.getElementById('error-display');
+
+        // Fonction pour formater le résultat en JSON lisible
+        const formatJson = (data) => JSON.stringify(data, null, 2);
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const query = queryTextarea.value.trim();
+            
+            resultsOutput.textContent = '[ Executing... ]';
+            errorDisplay.style.display = 'none';
+
+            if (!query) {
+                errorDisplay.textContent = 'Please enter a query.';
+                errorDisplay.style.display = 'block';
+                resultsOutput.textContent = '';
+                return;
+            }
+
+            // ATTENTION : Cette partie REQUIERT l'installation et l'initialisation de Supabase !
+            
+            /*
+            try {
+                // Supabase utilise .from().select() pour les requêtes basiques
+                // ou .rpc() pour les fonctions Postgres, et .from().sql() pour des requêtes brutes
+                
+                // Pour une requête simple de 'SELECT' :
+                // const { data, error } = await supabase.from('parts').select('*');
+                
+                // Pour l'exécution de requêtes SQL brutes (plus risqué et nécessite des configurations RLS/Policy) :
+                // La fonction `rpc` est souvent utilisée pour exécuter des fonctions SQL définies côté Supabase.
+                // Si vous voulez exécuter des requêtes brutes SELECT/INSERT/UPDATE/DELETE,
+                // il faudra peut-être utiliser une fonction Edge Function ou une fonction RLS/Policy spécifique.
+                
+                // Exemple hypothétique de fonction de test RLS via rpc (le plus sécurisé) :
+                // const { data, error } = await supabase.rpc('execute_test_query', { p_query: query });
+
+                // Pour l'instant, on simule :
+                const data = {
+                    query: query,
+                    status: 'Simulated OK',
+                    rows_returned: Math.floor(Math.random() * 10) + 1,
+                    data_preview: [
+                        { id: 1, part_number: 'A340-001', supplier: 'MRO-X' },
+                        { id: 2, part_number: 'B787-005', supplier: 'MRO-Y' }
+                    ]
+                };
+                const error = null;
+
+                if (error) {
+                    errorDisplay.textContent = 'SQL Error: ' + error.message;
+                    errorDisplay.style.display = 'block';
+                    resultsOutput.textContent = formatJson(error);
+                } else {
+                    resultsOutput.textContent = formatJson(data);
+                }
+
+            } catch (e) {
+                errorDisplay.textContent = 'Execution Error: ' + e.message;
+                errorDisplay.style.display = 'block';
+                resultsOutput.textContent = '';
+            }
+            */
+
+           // SIMULATION : (Retirez cette partie lorsque vous activez le code Supabase ci-dessus)
+           const data = {
+                query: query,
+                status: 'Simulated OK. Activate Supabase code for real test.',
+                rows_returned: Math.floor(Math.random() * 10) + 1,
+                data_preview: [
+                    { id: 1, part_number: 'A340-001', supplier: 'MRO-X' },
+                    { id: 2, part_number: 'B787-005', supplier: 'MRO-Y' }
+                ]
+            };
+            resultsOutput.textContent = formatJson(data);
+        });
+
+    </script>
+    
+</body>
+</html>
