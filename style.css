@@ -94,7 +94,7 @@ nav a:hover {
 }
 
 .btn-trial:hover, .btn-send:hover, .btn-execute:hover { 
-    background-color: #223E50;
+    background-color: var(--color-secondary);
 }
 
 /* --- 3. Hero Sections (Spécifiques) --- */
@@ -137,7 +137,7 @@ nav a:hover {
     justify-content: center;
     text-align: center;
     padding: 5rem 2rem;
-    background-color: #223E50; 
+    background-color: var(--color-secondary); 
     color: #ffffff; 
 }
 
@@ -178,7 +178,7 @@ nav a:hover {
 
 /* --- 4. Slogan Banner (index.html) --- */
 .slogan-banner {
-    background-color: #223E50; 
+    background-color: var(--color-secondary); 
     color: white;
     text-align: center;
     padding: 2.5rem 2rem;
@@ -212,7 +212,7 @@ nav a:hover {
 
 .info-box h3 {
     font-size: 1.5rem;
-    color: #223E50; 
+    color: var(--color-secondary); 
     margin-top: 0;
     border-bottom: 2px solid #466E82; 
     padding-bottom: 0.5rem;
@@ -245,7 +245,7 @@ nav a:hover {
 
 .contact-form-box h2, .info-box-contact h2 {
     font-size: 1.8rem;
-    color: #223E50;
+    color: var(--color-secondary);
     margin-top: 0;
     margin-bottom: 1.5rem;
     border-bottom: 3px solid #466E82;
@@ -299,7 +299,7 @@ nav a:hover {
 }
 
 .info-box-contact strong {
-    color: #223E50;
+    color: var(--color-secondary);
 }
 
 /* --- 7. Login Page Specifics --- */
@@ -319,7 +319,7 @@ nav a:hover {
 
 .login-box h2 {
     font-size: 2rem;
-    color: #223E50;
+    color: var(--color-secondary);
     margin-bottom: 2rem;
     border-bottom: 3px solid #466E82;
     padding-bottom: 0.5rem;
@@ -329,7 +329,7 @@ nav a:hover {
 .btn-submit {
     width: 100%;
     padding: 1rem;
-    background-color: #466E82;
+    background-color: var(--color-primary);
     color: white;
     font-size: 1.1rem;
     font-weight: bold;
@@ -380,7 +380,7 @@ nav a:hover {
 }
 
 .feature-box h3 {
-    color: #223E50;
+    color: var(--color-secondary);
     font-size: 1.4rem;
     margin-top: 0;
     margin-bottom: 1rem;
@@ -446,7 +446,7 @@ nav a:hover {
 }
 
 .text-content h3 {
-    color: #223E50;
+    color: var(--color-secondary);
     font-size: 1.6rem;
     border-left: 4px solid #466E82;
     padding-left: 15px;
@@ -457,7 +457,7 @@ nav a:hover {
 .content-section h2 {
     text-align: center;
     font-size: 2.2rem;
-    color: #223E50;
+    color: var(--color-secondary);
     margin-bottom: 3rem;
 }
 
@@ -499,7 +499,7 @@ nav a:hover {
 
 .query-tester-container h2 {
     font-size: 2rem;
-    color: #223E50;
+    color: var(--color-secondary);
     margin-bottom: 1.5rem;
     border-bottom: 3px solid #466E82;
     padding-bottom: 0.5rem;
@@ -546,7 +546,7 @@ label[for="sql-query"] {
 }
 
 #results-area h3 {
-    color: #223E50;
+    color: var(--color-secondary);
     margin-top: 0;
     margin-bottom: 1rem;
 }
@@ -573,7 +573,7 @@ label[for="sql-query"] {
 footer {
     text-align: center;
     padding: 2rem;
-    background-color: #223E50; 
+    background-color: var(--color-secondary); 
     color: #f0f0f0;
     border-top: 1px solid #466E82; 
     margin-top: 2rem;
