@@ -1,10 +1,27 @@
+:root {
+    /* --- Couleurs Primaires (Basées sur votre design LMC) --- */
+    --color-primary: #466E82;      /* Bleu LMC principal */
+    --color-secondary: #223E50;    /* Bleu LMC foncé (pied de page, titres) */
+    --color-text-main: #333;       /* Texte général */
+    --color-background-light: #f4f4f9; /* Fond des pages */
+    --color-white: #ffffff;
+    
+    /* --- Tailles de Police de Base --- */
+    --font-size-base: 1rem;
+    --font-size-large: 1.2rem;
+    
+    /* --- Espacements --- */
+    --spacing-default: 1rem;
+    --spacing-large: 2rem;
+}
+
 /* --- 0. General Styles --- */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    color: #333;
-    background-color: #f4f4f9; /* Défini sur les pages internes */
+    color: var(--color-text-main);
+    background-color: var(--color-background-light); /* Défini sur les pages internes */
 }
 
 /* --- 1. Navigation Header & Layout --- */
@@ -14,7 +31,7 @@ header {
     align-items: center;
     padding: 1rem 2rem;
     border-bottom: 1px solid #e0e0e0;
-    background-color: #ffffff;
+    background-color: var(--color-white);
 }
 
 .logo {
@@ -39,7 +56,7 @@ nav a {
 }
 
 nav a:hover {
-    color: #466E82; /* Votre couleur primaire */
+    color: var(--color-primary); /* Votre couleur primaire */
 }
 
 .header-buttons {
@@ -68,7 +85,7 @@ nav a:hover {
 }
 
 .btn-trial {
-    background-color: #466E82;
+    background-color: var(--color-primary);
     color: white;
 }
 
@@ -88,7 +105,7 @@ nav a:hover {
     justify-content: center;
     text-align: center;
     padding: 5rem 2rem;
-    background-color: #466E82; /* CHANGED */
+    background-color: var(--color-primary); /* CHANGED */
     color: #ffffff; 
 }
 
@@ -143,7 +160,7 @@ nav a:hover {
     justify-content: center;
     text-align: center;
     padding: 5rem 2rem;
-    background-color: #466E82; 
+    background-color: var(--color-primary); 
     color: #ffffff; 
 }
 
@@ -266,7 +283,7 @@ nav a:hover {
 .btn-send {
     width: 100%;
     padding: 1rem;
-    background-color: #466E82;
+    background-color: var(--color-primary);
     color: white;
     font-size: 1.1rem;
     font-weight: bold;
@@ -326,7 +343,7 @@ nav a:hover {
 .forgot-link {
     display: block;
     margin-top: 1.5rem;
-    color: #466E82;
+    color: var(--color-primary);
     text-decoration: none;
     font-size: 0.95rem;
 }
@@ -370,7 +387,7 @@ nav a:hover {
 }
 
 .cta-banner {
-    background-color: #466E82;
+    background-color: var(--color-primary);
     color: white;
     text-align: center;
     padding: 3rem 2rem;
@@ -384,7 +401,7 @@ nav a:hover {
 
 .cta-banner a {
     background-color: white;
-    color: #466E82;
+    color: var(--color-primary);
     font-weight: bold;
     padding: 0.8rem 2rem;
     border-radius: 5px;
@@ -465,7 +482,7 @@ nav a:hover {
 .step-box .number {
     font-size: 2rem;
     font-weight: bold;
-    color: #466E82;
+    color: var(--color-primary);
     margin-bottom: 1rem;
     display: block;
 }
@@ -509,7 +526,7 @@ label[for="sql-query"] {
 
 .btn-execute {
     padding: 1rem 2rem;
-    background-color: #466E82;
+    background-color: var(--color-primary);
     color: white;
     font-size: 1.1rem;
     font-weight: bold;
