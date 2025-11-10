@@ -37,7 +37,7 @@ header {
 .logo {
     font-size: 1.8rem;
     font-weight: bold;
-    color: #007bff;
+    color: var(--color-primary);
 }
 
 nav ul {
@@ -106,7 +106,7 @@ nav a:hover {
     text-align: center;
     padding: 5rem 2rem;
     background-color: var(--color-primary); /* CHANGED */
-    color: #ffffff; 
+    color: var(--color-white); 
 }
 
 .hero h1 {
@@ -138,7 +138,7 @@ nav a:hover {
     text-align: center;
     padding: 5rem 2rem;
     background-color: var(--color-secondary); 
-    color: #ffffff; 
+    color: var(--color-white); 
 }
 
 .mro-hero h1 {
@@ -161,7 +161,7 @@ nav a:hover {
     text-align: center;
     padding: 5rem 2rem;
     background-color: var(--color-primary); 
-    color: #ffffff; 
+    color: var(--color-white); 
 }
 
 .customer-hero h1 {
