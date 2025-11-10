@@ -81,7 +81,7 @@ nav a:hover {
 .btn-login {
     background-color: transparent;
     border: 1px solid #466E82;
-    color: #466E82;
+    color: var(--color-primary);
 }
 
 .btn-trial {
