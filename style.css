@@ -461,7 +461,19 @@ nav a:hover {
     padding-left: 15px;
     margin-top: 0;
 }
+.btn-inverted {
+    /* Couleur du fond en blanc (Variable) */
+    background-color: var(--color-white);
+    
+    /* Couleur du texte en Bleu LMC (Variable) */
+    color: var(--color-primary); 
+}
 
+/* Optionnel : Définir un survol (hover) avec vos variables */
+.btn-inverted:hover {
+    background-color: #f0f0f0; /* Un gris très léger */
+    color: var(--color-secondary); /* Le texte devient bleu foncé au survol */
+}
 /* --- 9. Customer Page Specifics --- */
 .content-section h2 {
     text-align: center;
