@@ -1,26 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-R">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LMC - SQL Query Tester</title>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="styles.css"> </head>
 <body>
 
     <header>
         <div class="logo">
-            LMC
-        </div>
+            <a href="index.html" style="text-decoration: none; color: inherit;">LMC</a> </div>
         
         <nav>
             <ul>
                 <li><a href="customer.html">For Customer</a></li>
                 <li><a href="mro.html">For MRO</a></li>
-                <li><a href="index.html">Platform</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="sql-test.html" style="color: #466E82;">SQL Test</a></li> 
+                <li><a href="sql-test.html" style="color: var(--color-primary);">SQL Test</a></li> 
             </ul>
         </nav>
 
@@ -53,99 +49,7 @@
         <p>&copy; 2025 LMC. All rights reserved.</p>
     </footer>
 
-    <script>
-        // *** Démarrage du script pour Supabase ***
-        
-        // 1. Configuration (Anticipation de vos contraintes)
-        // Vous aurez besoin de votre URL de projet et de votre clé publique (Anon Key)
-        const SUPABASE_URL = 'VOTRE_URL_SUPABASE'; // À remplacer !
-        const SUPABASE_ANON_KEY = 'VOTRE_CLE_PUBLIQUE_ANON'; // À remplacer !
-
-        // 2. Initialisation du client Supabase
-        // const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-        // La ligne ci-dessus sera fonctionnelle après l'importation du CDN (Étape 1)
-
-        const form = document.getElementById('query-form');
-        const queryTextarea = document.getElementById('sql-query');
-        const resultsOutput = document.getElementById('results-output');
-        const errorDisplay = document.getElementById('error-display');
-
-        // Fonction pour formater le résultat en JSON lisible
-        const formatJson = (data) => JSON.stringify(data, null, 2);
-
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const query = queryTextarea.value.trim();
-            
-            resultsOutput.textContent = '[ Executing... ]';
-            errorDisplay.style.display = 'none';
-
-            if (!query) {
-                errorDisplay.textContent = 'Please enter a query.';
-                errorDisplay.style.display = 'block';
-                resultsOutput.textContent = '';
-                return;
-            }
-
-            // ATTENTION : Cette partie REQUIERT l'installation et l'initialisation de Supabase !
-            
-            /*
-            try {
-                // Supabase utilise .from().select() pour les requêtes basiques
-                // ou .rpc() pour les fonctions Postgres, et .from().sql() pour des requêtes brutes
-                
-                // Pour une requête simple de 'SELECT' :
-                // const { data, error } = await supabase.from('parts').select('*');
-                
-                // Pour l'exécution de requêtes SQL brutes (plus risqué et nécessite des configurations RLS/Policy) :
-                // La fonction `rpc` est souvent utilisée pour exécuter des fonctions SQL définies côté Supabase.
-                // Si vous voulez exécuter des requêtes brutes SELECT/INSERT/UPDATE/DELETE,
-                // il faudra peut-être utiliser une fonction Edge Function ou une fonction RLS/Policy spécifique.
-                
-                // Exemple hypothétique de fonction de test RLS via rpc (le plus sécurisé) :
-                // const { data, error } = await supabase.rpc('execute_test_query', { p_query: query });
-
-                // Pour l'instant, on simule :
-                const data = {
-                    query: query,
-                    status: 'Simulated OK',
-                    rows_returned: Math.floor(Math.random() * 10) + 1,
-                    data_preview: [
-                        { id: 1, part_number: 'A340-001', supplier: 'MRO-X' },
-                        { id: 2, part_number: 'B787-005', supplier: 'MRO-Y' }
-                    ]
-                };
-                const error = null;
-
-                if (error) {
-                    errorDisplay.textContent = 'SQL Error: ' + error.message;
-                    errorDisplay.style.display = 'block';
-                    resultsOutput.textContent = formatJson(error);
-                } else {
-                    resultsOutput.textContent = formatJson(data);
-                }
-
-            } catch (e) {
-                errorDisplay.textContent = 'Execution Error: ' + e.message;
-                errorDisplay.style.display = 'block';
-                resultsOutput.textContent = '';
-            }
-            */
-
-           // SIMULATION : (Retirez cette partie lorsque vous activez le code Supabase ci-dessus)
-           const data = {
-                query: query,
-                status: 'Simulated OK. Activate Supabase code for real test.',
-                rows_returned: Math.floor(Math.random() * 10) + 1,
-                data_preview: [
-                    { id: 1, part_number: 'A340-001', supplier: 'MRO-X' },
-                    { id: 2, part_number: 'B787-005', supplier: 'MRO-Y' }
-                ]
-            };
-            resultsOutput.textContent = formatJson(data);
-        });
-
-    <script src="script.js"></script>
+    <script src="sql-tester.js"></script>
     
 </body>
 </html>
