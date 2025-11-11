@@ -104,7 +104,7 @@ nav a:hover {
     align-items: center;
     justify-content: center;
     text-align: center;
-    padding: 5rem 2rem;
+    padding: 2rem 2rem;
     background-color: var(--color-primary); /* CHANGED */
     color: var(--color-white); 
 }
