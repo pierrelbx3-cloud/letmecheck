@@ -4,8 +4,8 @@
 
 // IMPORTANT : Remplacez ces valeurs par celles de votre projet Supabase.
 // Vous les trouverez dans les paramètres de votre projet, sous 'API Settings'.
-const SUPABASE_URL = 'VOTRE_URL_SUPABASE'; 
-const SUPABASE_ANON_KEY = 'VOTRE_CLE_PUBLIQUE_ANON'; 
+const SUPABASE_URL = 'https://nsbbemlzhpyngeorvrrk.supabase.co'; 
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zYmJlbWx6aHB5bmdlb3J2cnJrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEyMDA0OTEsImV4cCI6MjA3Njc3NjQ5MX0.5MhJ98Q8SJQ3OwvzZZ9xcsg8C9FdYrvnFcRdsfatC7A'; 
 
 // Initialisation du client Supabase
 // Ceci crée une instance que nous utiliserons pour toutes les communications API.
