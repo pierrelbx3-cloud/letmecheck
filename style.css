@@ -464,7 +464,6 @@ nav a:hover {
 .btn-inverted {
     /* Couleur du fond en blanc (Variable) */
     background-color: var(--color-white);
-    
     /* Couleur du texte en Bleu LMC (Variable) */
     color: var(--color-primary); 
 }
