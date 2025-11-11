@@ -137,7 +137,7 @@ nav a:hover {
     justify-content: center;
     text-align: center;
     padding: 5rem 2rem;
-    background-color: var(--color-secondary); 
+    background-color: var(--color-primary); 
     color: var(--color-white); 
 }
 
