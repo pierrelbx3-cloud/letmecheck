@@ -174,7 +174,15 @@ nav a:hover {
     color: #f0f0f0;
     margin-bottom: 2rem;
 }
-
+.cta-customer {
+    background-color: var(--color-white); /* ou white si pas de variables */
+    color: var(--color-primary);        /* pour utiliser votre bleu LMC */
+    /* Vous pouvez aussi ajouter un style de survol spécifique ici */
+}
+.cta-customer:hover {
+    background-color: #f0f0f0; /* Très légèrement gris au survol */
+    color: var(--color-secondary); /* Le texte devient bleu foncé au survol */
+}
 
 /* --- 4. Slogan Banner (index.html) --- */
 .slogan-banner {
