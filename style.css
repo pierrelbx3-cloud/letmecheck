@@ -448,7 +448,7 @@ nav a:hover {
 .text-content h3 {
     color: var(--color-secondary);
     font-size: 1.6rem;
-    border-left: 4px solid #466E82;
+    border-left: 4px solid var(--color-primary);
     padding-left: 15px;
     margin-top: 0;
 }
