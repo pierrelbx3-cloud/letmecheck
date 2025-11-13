@@ -1,0 +1,37 @@
+/* --- 6. Contact Page Specifics --- */
+.contact-section {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.contact-form-box, .info-box-contact {
+    background-color: #ffffff;
+    padding: 2.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    flex-basis: 45%; 
+    min-width: 300px;
+}
+
+.contact-form-box h2, .info-box-contact h2 {
+    font-size: 1.8rem;
+    color: var(--color-secondary);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    border-bottom: 3px solid var(--color-primary);
+    padding-bottom: 0.5rem;
+}
+
+.info-box-contact p {
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.info-box-contact strong {
+    color: var(--color-secondary);
+}
