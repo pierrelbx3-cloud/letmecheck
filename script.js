@@ -87,3 +87,121 @@ async function runSearch() {
 }
 
 // runSearch(); // Décommentez pour exécuter
+
+// Assurez-vous que l'objet 'supabase' est déjà initialisé ici !
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. Charger les listes déroulantes
+    loadDropdowns();
+    
+    // 2. Écouter la soumission du formulaire
+    document.getElementById('search-form').addEventListener('submit', handleSearch);
+});
+
+// --- ÉTAPE 1 : Chargement des données initiales ---
+
+async function loadDropdowns() {
+    // A. Charger les Modèles d'Avion
+    const { data: models, error: modelError } = await supabase
+        .from('type_avion') // Nom de votre table de modèles d'avion
+        .select('id_type, model');
+
+    if (models) {
+        const select = document.getElementById('model-select');
+        models.forEach(m => {
+            const option = document.createElement('option');
+            // Mettez à jour 'id_type' et 'model' si les noms de colonnes sont différents
+            option.value = m.id_type;
+            option.textContent = m.model;
+            select.appendChild(option);
+        });
+    }
+
+    // B. Charger les Services
+    const { data: services, error: serviceError } = await supabase
+        .from('services') // Nom de votre table de services
+        .select('id, service_type'); // Utilisez 'id' et 'service_type' (selon votre correction)
+
+    if (services) {
+        const select = document.getElementById('service-select');
+        services.forEach(s => {
+            const option = document.createElement('option');
+            // Mettez à jour 'id' et 'service_type' si les noms de colonnes sont différents
+            option.value = s.id;
+            option.textContent = s.service_type;
+            select.appendChild(option);
+        });
+    }
+}
+
+
+// --- ÉTAPE 2 : Gestion de la recherche ---
+
+async function handleSearch(event) {
+    event.preventDefault();
+    const output = document.getElementById('results-output');
+    output.innerHTML = '<p>Recherche en cours...</p>';
+
+    // Récupération des valeurs du formulaire
+    const aircraftId = document.getElementById('model-select').value;
+    const serviceId = document.getElementById('service-select').value;
+    const startDate = document.getElementById('start-date').value;
+    const endDate = document.getElementById('end-date').value;
+
+    if (!aircraftId || !serviceId || !startDate || !endDate) {
+        output.innerHTML = '<p style="color: red;">Veuillez remplir tous les champs.</p>';
+        return;
+    }
+
+    // Appel à la fonction RPC PostgreSQL que nous avons créée
+    const { data, error } = await supabase.rpc('search_available_slots', {
+        p_aircraft_id: aircraftId,
+        p_service_id: serviceId,
+        p_start_date: startDate,
+        p_end_date: endDate
+    });
+
+    if (error) {
+        output.innerHTML = `<p style="color: red;">Erreur SQL : ${error.message}</p>`;
+    } else {
+        displayResults(data, output);
+    }
+}
+
+// --- ÉTAPE 3 : Affichage des résultats ---
+
+function displayResults(data, outputElement) {
+    if (data.length === 0) {
+        outputElement.innerHTML = '<p>Désolé, aucun slot disponible pour ces critères.</p>';
+        return;
+    }
+
+    // Crée une table pour afficher les données
+    let html = `
+        <p><strong>${data.length} slot(s) disponible(s) trouvé(s) :</strong></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Hangar</th>
+                    <th>Ville</th>
+                    <th>Type de Slot</th>
+                    <th>ID Slot</th>
+                </tr>
+            </thead>
+            <tbody>
+    `;
+
+    data.forEach(item => {
+        // 'item' est l'objet JSON retourné par la fonction RPC
+        html += `
+            <tr>
+                <td>${item.nom_hangar}</td>
+                <td>${item.ville}</td>
+                <td>${item.slot_type}</td>
+                <td>${item.slot_id}</td>
+            </tr>
+        `;
+    });
+
+    html += '</tbody></table>';
+    outputElement.innerHTML = html;
+}
