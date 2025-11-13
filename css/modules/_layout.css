@@ -1,0 +1,65 @@
+/* --- 1. Navigation Header & Layout --- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: var(--color-white);
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 25px;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    text-decoration: none;
+    color: #555;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+nav a:hover {
+    color: var(--color-primary);
+}
+
+.header-buttons {
+    display: flex;
+    gap: 10px;
+    margin-left: 25px;
+}
+
+/* --- Section de contenu générique (MRO, Customer) --- */
+.content-section {
+    padding: 4rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.content-section h2 {
+    text-align: center;
+    font-size: 2.2rem;
+    color: var(--color-secondary);
+    margin-bottom: 3rem;
+}
+
+
+/* --- 11. Footer --- */
+footer {
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--color-secondary);
+    color: #f0f0f0;
+    border-top: 1px solid var(--color-primary);
+    margin-top: 2rem;
+}
