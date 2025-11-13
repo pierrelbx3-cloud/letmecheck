@@ -187,16 +187,17 @@ async function handleSearch(event) {
         displayResults(data, output);
     }
 }
-
-
 // =================================================================
-// 5. AFFICHAGE DES RÉSULTATS (ADAPTÉ) 📊
+// 5. AFFICHAGE DES RÉSULTATS (CORRIGÉ) 📊
 // =================================================================
 
 function displayResults(data, outputElement) {
-    // La fonction SQL renvoie un tableau d'objets JSON sous la clé 'available_slot_data'
-    // Nous devons extraire les données de cet objet
-    const finalData = data.map(item => item.available_slot_data);
+    
+    // 1. Filtrer les éléments nuls/indéfinis et mapper pour extraire la bonne clé.
+    // Utilisation de ?. (optional chaining) pour éviter l'erreur si l'élément est mal formé.
+    const finalData = data
+        .map(item => item?.available_slot_data) // Tente d'accéder à available_slot_data, retourne undefined si item est null
+        .filter(item => item !== undefined && item !== null); // Retire les undefined/null du tableau final
 
     if (finalData.length === 0) {
         outputElement.innerHTML = '<p class="no-results">Désolé, aucun slot disponible pour ces critères (TC Holder, Modèle, Service et Date) dans les hangars compatibles.</p>';
@@ -221,7 +222,7 @@ function displayResults(data, outputElement) {
     finalData.forEach(item => {
         html += `
             <tr>
-                <td>${item.nom_hangar}</td>
+                <td>${item.nom_hangar}</td> 
                 <td>${item.ville}</td>
                 <td>${item.slot_type}</td>
                 <td>${item.hangar_agrement}</td>
