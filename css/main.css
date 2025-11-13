@@ -1,0 +1,22 @@
+/* Fichier principal : main.css */
+
+/* 1. Variables (Couleurs, Polices) */
+@import url("./modules/_variables.css");
+
+/* 2. Styles de Base (body, réinitialisation) */
+@import url("./modules/_base.css");
+
+/* 3. Mise en page (Header, Footer, Grilles) */
+@import url("./modules/_layout.css");
+
+/* 4. Composants Réutilisables (Boutons, Cartes, Formulaires) */
+@import url("./modules/_components.css");
+
+/* 5. Styles de Pages Spécifiques (en dernier pour la priorité) */
+@import url("./pages/_home.css");
+@import url("./pages/_contact.css");
+@import url("./pages/_login.css");
+@import url("./pages/_mro.css");
+@import url("./pages/_customer.css");
+@import url("./pages/_sql-tester.css");
+@import url("./pages/_reservation.css");
