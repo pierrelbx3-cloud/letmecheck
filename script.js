@@ -71,7 +71,7 @@ async function loadTcHolders() {
         console.error("Erreur chargement TC Holders (RPC):", error);
         // Si la RPC échoue, essayez la requête directe (plus robuste si la fonction n'est pas créée)
         const { data: directData, error: directError } = await supabase
-            .from('aircrafts')
+            .from('type_avion')
             .select('tc_holder', { distinct: true })
             .order('tc_holder');
         
