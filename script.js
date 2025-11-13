@@ -158,7 +158,9 @@ async function handleSearch(event) {
     const serviceId = document.getElementById('service-select').value;
     const startDate = document.getElementById('start-date').value;
     const endDate = document.getElementById('end-date').value;
-
+console.log("TC Holder envoyé :", `'${tcHolder}'`);
+console.log("Modèle envoyé :", `'${model}'`);
+console.log("Service ID envoyé :", parseInt(serviceId));
     if (!tcHolder || !model || !serviceId || !startDate || !endDate) {
         output.innerHTML = '<p style="color: orange;">Veuillez remplir tous les champs avant de lancer la recherche.</p>';
         return;
