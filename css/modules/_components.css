@@ -1,0 +1,161 @@
+/* --- 2. Buttons (Générique) --- */
+.btn {
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.3s;
+}
+
+.btn-login {
+    background-color: transparent;
+    border: 1px solid var(--color-primary);
+    color: var(--color-primary);
+}
+.btn-login:hover {
+    background-color: #e6f0fa;
+}
+
+.btn-trial {
+    background-color: var(--color-primary);
+    color: white;
+}
+.btn-trial:hover {
+    background-color: var(--color-secondary);
+}
+
+.btn-send, .btn-submit, .btn-execute {
+    width: 100%;
+    padding: 1rem;
+    background-color: var(--color-primary);
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.btn-send:hover, .btn-submit:hover, .btn-execute:hover {
+    background-color: var(--color-secondary);
+}
+
+.btn-execute {
+    width: auto;
+    padding: 1rem 2rem;
+    margin-top: 1rem;
+    align-self: flex-start;
+}
+.btn-submit {
+    margin-top: 1rem;
+}
+
+.btn-inverted {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+}
+.btn-inverted:hover {
+    background-color: #f0f0f0;
+    color: var(--color-secondary);
+}
+
+/* --- Styles des Formulaires (Contact, Login, SQL) --- */
+.input-group {
+    margin-bottom: 1.5rem;
+}
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    color: #333;
+}
+.input-group input[type="text"],
+.input-group input[type="email"],
+.input-group input[type="password"],
+.input-group textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+.input-group textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+/* --- 5. Info Boxes (index.html) --- */
+.info-boxes {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    padding: 4rem 2rem;
+    background-color: #ffffff;
+    flex-wrap: wrap;
+}
+
+.info-box {
+    flex-basis: 450px;
+    padding: 2rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.info-box h3 {
+    font-size: 1.5rem;
+    color: var(--color-secondary);
+    margin-top: 0;
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 0.5rem;
+}
+
+.info-box p {
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* --- 8. MRO Feature Box --- */
+.feature-box {
+    flex-basis: calc(33% - 20px);
+    min-width: 300px;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    text-align: center;
+    border-top: 5px solid var(--color-primary);
+    transition: transform 0.3s;
+}
+.feature-box:hover {
+    transform: translateY(-5px);
+}
+.feature-box h3 {
+    color: var(--color-secondary);
+    font-size: 1.4rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+/* --- 9. Customer Step Box --- */
+.step-box {
+    flex-basis: calc(33% - 20px);
+    min-width: 250px;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    border-bottom: 5px solid var(--color-secondary);
+}
+.step-box .number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    display: block;
+}
