@@ -74,8 +74,8 @@ async function loadDropdowns() {
         
         services.forEach(s => {
             const option = document.createElement('option');
-            option.value = s.id;
-            option.textContent = s.service_type;
+            option.value = s.id_service;
+            option.textContent = s.type_service;
             select.appendChild(option);
         });
     }
