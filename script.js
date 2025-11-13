@@ -42,7 +42,7 @@ async function loadDropdowns() {
     
     const { data: models, error: modelError } = await supabase
         .from('type_avion') 
-        .select('id_type, model'); // Colonnes de votre table
+        .select('id_type, model_avion'); // Colonnes de votre table
 
     if (modelError) console.error("Erreur chargement Modèles:", modelError);
 
@@ -54,7 +54,7 @@ async function loadDropdowns() {
         models.forEach(m => {
             const option = document.createElement('option');
             option.value = m.id_type;
-            option.textContent = m.model;
+            option.textContent = m.model_avion;
             select.appendChild(option);
         });
     }
