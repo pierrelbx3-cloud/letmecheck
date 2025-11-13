@@ -173,11 +173,11 @@ async function handleSearch(event) {
     // ... (Reste du code, y compris l'appel console.log si vous faites du débogage)
 
     const { data, error } = await supabase.rpc('search_available_slots', {
-        p_tc_holder: tcHolder, // Utilisation de la variable déclarée
-        p_model: model, 
-        p_start_date_text: startTimestamp, // NOUVEAU NOM DE PARAMÈTRE
-    p_end_date_text: endTimestamp
-        // ...
+    p_tc_holder: tcHolder,
+    p_model: model, 
+    p_service_id: parseInt(serviceId),
+    p_start_date_text: startTimestamp, // NOUVEAU
+    p_end_date_text: endTimestamp      // NOUVEAU
     });
 
     // ...
