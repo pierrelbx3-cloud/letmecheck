@@ -158,11 +158,12 @@ async function handleSearch(event) {
     const serviceId = document.getElementById('service-select').value;
     const startDate = document.getElementById('start-date').value;
     const endDate = document.getElementById('end-date').value;
+    
 console.log("TC Holder envoyé :", `'${tcHolder}'`);
 console.log("Modèle envoyé :", `'${model}'`);
 console.log("Service ID envoyé :", parseInt(serviceId));
-console.log("Debut :", `'${startDate}'`);
-console.log("Fin :", `'${endDate}'`);
+console.log(`Debut: ${startTimestamp}`); // '2025-11-16T00:00:00.000Z'
+console.log(`Fin: ${endTimestamp}`);
     
     if (!tcHolder || !model || !serviceId || !startDate || !endDate) {
         output.innerHTML = '<p style="color: orange;">Veuillez remplir tous les champs avant de lancer la recherche.</p>';
