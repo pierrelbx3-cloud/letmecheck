@@ -1,131 +1,79 @@
 // =================================================================
-// 1. CONFIGURATION SUPABASE (À REMPLACER)
+// 1. CONFIGURATION SUPABASE (À VÉRIFIER)
 // =================================================================
 
-// IMPORTANT : Remplacez ces valeurs par celles de votre projet Supabase.
-// Vous les trouverez dans les paramètres de votre projet, sous 'API Settings'.
+// Les URLs et clés sont conservées, assurez-vous qu'elles sont correctes et valides.
 const SUPABASE_URL = 'https://nsbbemlzhpyngeorvrrk.supabase.co'; 
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zYmJlbWx6aHB5bmdlb3J2cnJrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEyMDA0OTEsImV4cCI6MjA3Njc3NjQ5MX0.5MhJ98Q8SJQ3OwvzZZ9xcsg8C9FdYrvnFcRdsfatC7A'; 
 
 // Initialisation du client Supabase
-// Ceci crée une instance que nous utiliserons pour toutes les communications API.
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 
 // =================================================================
-// 2. RÉCUPÉRATION DES ÉLÉMENTS DU DOM
+// 2. GESTION DES ÉVÉNEMENTS & INITIALISATION
 // =================================================================
 
-const form = document.getElementById('query-form');
-const queryTextarea = document.getElementById('sql-query');
-const resultsOutput = document.getElementById('results-output');
-const errorDisplay = document.getElementById('error-display');
-
-
-// =================================================================
-// 3. FONCTION UTILITAIRE
-// =================================================================
-
-// Fonction pour formater le résultat de l'API en JSON lisible
-const formatJson = (data) => JSON.stringify(data, null, 2);
-
-
-// =================================================================
-// 4. GESTIONNAIRE D'ÉVÉNEMENT (Exécution de la Requête)
-// =================================================================
-
-form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const query = queryTextarea.value.trim();
-    
-    // ... vérifications et affichage 'Executing...' ...
-
-    try {
-        // *** Remplacement du code de simulation par l'appel RPC réel ***
-        const { data, error } = await supabase.rpc('execute_test_query', { 
-             p_query: query // Le nom du paramètre (p_query) doit correspondre à la fonction SQL
-        });
-        
-        // -----------------------------------------------------------------
-
-        if (error) {
-            errorDisplay.textContent = 'SQL Error: ' + error.message;
-            errorDisplay.style.display = 'block';
-            resultsOutput.textContent = formatJson(error);
-        } else {
-            // Affiche les données retournées (qui sont déjà au format JSON)
-            resultsOutput.textContent = formatJson(data);
-        }
-
-    } catch (e) {
-        // ... gestion des erreurs client ...
-    }
-});
-
-// Exemple de données de recherche (ces valeurs viendraient de vos formulaires HTML)
-const AIRCRAFT_ID = 1; // ID du modèle d'avion (ex: A320)
-const SERVICE_ID = 5;  // ID du service (ex: C-Check)
-const START_DATE = new Date('2025-12-01').toISOString();
-const END_DATE = new Date('2025-12-15').toISOString();
-
-async function runSearch() {
-    const { data, error } = await supabase.rpc('search_available_slots', {
-        p_aircraft_id: AIRCRAFT_ID,
-        p_service_id: SERVICE_ID,
-        p_start_date: START_DATE,
-        p_end_date: END_DATE
-    });
-
-    if (error) {
-        console.error("Erreur de recherche :", error);
-        // Affichez l'erreur dans la zone de résultats de votre console de test
-    } else {
-        console.log("Slots disponibles trouvés :", data);
-        // C'est le résultat final à afficher à l'utilisateur
-        // Vous devrez parcourir ce tableau pour générer la liste de résultats HTML.
-    }
-}
-
-// runSearch(); // Décommentez pour exécuter
-
-// Assurez-vous que l'objet 'supabase' est déjà initialisé ici !
+// L'événement se déclenche quand le DOM est prêt
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. Charger les listes déroulantes
+    // 1. Charger les listes déroulantes (Modèles et Services)
     loadDropdowns();
     
-    // 2. Écouter la soumission du formulaire
-    document.getElementById('search-form').addEventListener('submit', handleSearch);
+    // 2. Écouter la soumission du formulaire de recherche
+    // L'ID du formulaire doit être 'search-form' comme dans votre HTML
+    const searchForm = document.getElementById('search-form');
+    if (searchForm) {
+        searchForm.addEventListener('submit', handleSearch);
+    } else {
+        console.error("Erreur: Le formulaire d'ID 'search-form' est introuvable.");
+    }
+    
+    // NOTE : L'écouteur 'change' pour filterServicesByAircraft a été retiré,
+    // car vous souhaitez afficher tous les services.
 });
 
-// --- ÉTAPE 1 : Chargement des données initiales ---
+
+// =================================================================
+// 3. CHARGEMENT DES LISTES DÉROULANTES (TOUT AFFICHER) 🚀
+// =================================================================
 
 async function loadDropdowns() {
-    // A. Charger les Modèles d'Avion
+    // --- A. Charger les Modèles d'Avion ('type_avion') ---
+    
     const { data: models, error: modelError } = await supabase
-        .from('type_avion') // Nom de votre table de modèles d'avion
-        .select('id_type, model');
+        .from('type_avion') 
+        .select('id_type, model'); // Colonnes de votre table
+
+    if (modelError) console.error("Erreur chargement Modèles:", modelError);
 
     if (models) {
         const select = document.getElementById('model-select');
+        // Ajouter l'option par défaut
+        select.innerHTML = '<option value="">Sélectionner un modèle...</option>';
+        
         models.forEach(m => {
             const option = document.createElement('option');
-            // Mettez à jour 'id_type' et 'model' si les noms de colonnes sont différents
             option.value = m.id_type;
             option.textContent = m.model;
             select.appendChild(option);
         });
     }
 
-    // B. Charger les Services
+    // --- B. Charger TOUS les Services ('services') ---
+    
     const { data: services, error: serviceError } = await supabase
-        .from('services') // Nom de votre table de services
-        .select('id, service_type'); // Utilisez 'id' et 'service_type' (selon votre correction)
+        .from('services') 
+        .select('id, service_type'); // Colonnes de votre table
+
+    if (serviceError) console.error("Erreur chargement Services:", serviceError);
 
     if (services) {
         const select = document.getElementById('service-select');
+        // Ajouter l'option par défaut
+        select.innerHTML = '<option value="">Sélectionner un service...</option>';
+        
         services.forEach(s => {
             const option = document.createElement('option');
-            // Mettez à jour 'id' et 'service_type' si les noms de colonnes sont différents
             option.value = s.id;
             option.textContent = s.service_type;
             select.appendChild(option);
@@ -134,51 +82,61 @@ async function loadDropdowns() {
 }
 
 
-// --- ÉTAPE 2 : Gestion de la recherche ---
+// =================================================================
+// 4. GESTIONNAIRE DE RECHERCHE (APPEL RPC)
+// =================================================================
 
 async function handleSearch(event) {
     event.preventDefault();
     const output = document.getElementById('results-output');
     output.innerHTML = '<p>Recherche en cours...</p>';
 
-    // Récupération des valeurs du formulaire
+    // Récupération des valeurs du formulaire (assurez-vous des IDs HTML)
     const aircraftId = document.getElementById('model-select').value;
     const serviceId = document.getElementById('service-select').value;
     const startDate = document.getElementById('start-date').value;
     const endDate = document.getElementById('end-date').value;
 
     if (!aircraftId || !serviceId || !startDate || !endDate) {
-        output.innerHTML = '<p style="color: red;">Veuillez remplir tous les champs.</p>';
+        output.innerHTML = '<p style="color: orange;">Veuillez remplir tous les champs avant de lancer la recherche.</p>';
         return;
     }
+    
+    // Conversion des dates en format ISO 8601 UTC si les inputs sont de type 'date'
+    // Nous ajoutons T00:00:00.000Z pour garantir le bon format TimeZone
+    const startTimestamp = `${startDate}T00:00:00.000Z`;
+    const endTimestamp = `${endDate}T23:59:59.999Z`; // Fin de journée pour inclure tout le dernier jour
 
-    // Appel à la fonction RPC PostgreSQL que nous avons créée
+    // Appel à la fonction RPC PostgreSQL (moteur de recherche)
     const { data, error } = await supabase.rpc('search_available_slots', {
-        p_aircraft_id: aircraftId,
-        p_service_id: serviceId,
-        p_start_date: startDate,
-        p_end_date: endDate
+        p_aircraft_id: parseInt(aircraftId), // Convertir en nombre si nécessaire
+        p_service_id: parseInt(serviceId),   // Convertir en nombre si nécessaire
+        p_start_date: startTimestamp,
+        p_end_date: endTimestamp
     });
 
     if (error) {
-        output.innerHTML = `<p style="color: red;">Erreur SQL : ${error.message}</p>`;
+        output.innerHTML = `<p style="color: red;">Erreur SQL RPC : ${error.message}. Vérifiez la console pour les détails.</p>`;
+        console.error("Détails Erreur RPC:", error);
     } else {
         displayResults(data, output);
     }
 }
 
-// --- ÉTAPE 3 : Affichage des résultats ---
+
+// =================================================================
+// 5. AFFICHAGE DES RÉSULTATS
+// =================================================================
 
 function displayResults(data, outputElement) {
     if (data.length === 0) {
-        outputElement.innerHTML = '<p>Désolé, aucun slot disponible pour ces critères.</p>';
+        outputElement.innerHTML = '<p class="no-results">Désolé, aucun slot disponible pour ces critères (Modèle, Service et Date) dans les hangars compatibles.</p>';
         return;
     }
 
-    // Crée une table pour afficher les données
     let html = `
         <p><strong>${data.length} slot(s) disponible(s) trouvé(s) :</strong></p>
-        <table>
+        <table class="results-table">
             <thead>
                 <tr>
                     <th>Hangar</th>
@@ -191,7 +149,6 @@ function displayResults(data, outputElement) {
     `;
 
     data.forEach(item => {
-        // 'item' est l'objet JSON retourné par la fonction RPC
         html += `
             <tr>
                 <td>${item.nom_hangar}</td>
@@ -205,75 +162,3 @@ function displayResults(data, outputElement) {
     html += '</tbody></table>';
     outputElement.innerHTML = html;
 }
-// --- NOUVELLE FONCTION : Filtrer les Services en fonction du Modèle d'Avion ---
-
-async function filterServicesByAircraft() {
-    const aircraftId = document.getElementById('model-select').value;
-    const serviceSelect = document.getElementById('service-select');
-
-    // Réinitialiser les options de service
-    serviceSelect.innerHTML = '<option value="">Sélectionner...</option>';
-
-    if (!aircraftId) {
-        return; // Rien à faire si aucun avion n'est sélectionné
-    }
-
-    // Requête Supabase pour trouver les Services COMPATIBLES avec ce Modèle d'Avion
-    // On utilise la table de jointure hangar_avion pour trouver les hangars compatibles,
-    // puis on joint à hangar_service pour trouver les services offerts par ces hangars.
-    
-    // NOTE: C'est une requête complexe qui pourrait nécessiter une fonction RPC dédiée
-    // pour de meilleures performances, mais faisons-le en deux étapes simples pour l'exemple.
-
-    // ÉTAPE 1: Trouver les HANGARS compatibles avec ce modèle
-    const { data: compatibleHangars, error: hgError } = await supabase
-        .from('hangar_avion')
-        .select('id_hangar')
-        .eq('id_type', aircraftId);
-        
-    if (hgError || !compatibleHangars || compatibleHangars.length === 0) {
-        console.warn("Aucun hangar compatible trouvé pour ce modèle.");
-        return;
-    }
-
-    const hangarIds = compatibleHangars.map(h => h.id_hangar);
-    
-    // ÉTAPE 2: Trouver les SERVICES offerts par ces hangars compatibles
-    const { data: compatibleServices, error: svError } = await supabase
-        .from('hangar_services')
-        .select(`
-            service_id,
-            services ( id, service_type )
-        `)
-        .in('hangar_id', hangarIds);
-
-    if (svError) {
-        console.error("Erreur lors du chargement des services compatibles:", svError);
-        return;
-    }
-
-    // Récupérer et dédoublonner les services
-    const uniqueServices = new Map();
-    compatibleServices.forEach(item => {
-        if (item.services) {
-            uniqueServices.set(item.services.id, item.services.service_type);
-        }
-    });
-
-    // Remplir la liste déroulante des services
-    uniqueServices.forEach((serviceName, serviceId) => {
-        const option = document.createElement('option');
-        option.value = serviceId;
-        option.textContent = serviceName;
-        serviceSelect.appendChild(option);
-    });
-}
-
-// --- AJOUTER L'ÉCOUTEUR À LA FONCTION loadDropdowns OU DOMContentLoaded ---
-
-document.addEventListener('DOMContentLoaded', () => {
-    // ... [le reste du code DOMContentLoaded] ...
-    
-    // AJOUTEZ CETTE LIGNE : 
-    document.getElementById('model-select').addEventListener('change', filterServicesByAircraft);
-});
