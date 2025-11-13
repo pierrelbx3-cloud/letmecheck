@@ -161,6 +161,9 @@ async function handleSearch(event) {
 console.log("TC Holder envoyé :", `'${tcHolder}'`);
 console.log("Modèle envoyé :", `'${model}'`);
 console.log("Service ID envoyé :", parseInt(serviceId));
+console.log("Debut :", `'${startDate}'`);
+console.log("Fin :", `'${endDate}'`);
+    
     if (!tcHolder || !model || !serviceId || !startDate || !endDate) {
         output.innerHTML = '<p style="color: orange;">Veuillez remplir tous les champs avant de lancer la recherche.</p>';
         return;
