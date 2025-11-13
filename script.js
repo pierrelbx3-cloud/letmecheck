@@ -61,3 +61,29 @@ form.addEventListener('submit', async (e) => {
         // ... gestion des erreurs client ...
     }
 });
+
+// Exemple de données de recherche (ces valeurs viendraient de vos formulaires HTML)
+const AIRCRAFT_ID = 1; // ID du modèle d'avion (ex: A320)
+const SERVICE_ID = 5;  // ID du service (ex: C-Check)
+const START_DATE = new Date('2025-12-01').toISOString();
+const END_DATE = new Date('2025-12-15').toISOString();
+
+async function runSearch() {
+    const { data, error } = await supabase.rpc('search_available_slots', {
+        p_aircraft_id: AIRCRAFT_ID,
+        p_service_id: SERVICE_ID,
+        p_start_date: START_DATE,
+        p_end_date: END_DATE
+    });
+
+    if (error) {
+        console.error("Erreur de recherche :", error);
+        // Affichez l'erreur dans la zone de résultats de votre console de test
+    } else {
+        console.log("Slots disponibles trouvés :", data);
+        // C'est le résultat final à afficher à l'utilisateur
+        // Vous devrez parcourir ce tableau pour générer la liste de résultats HTML.
+    }
+}
+
+// runSearch(); // Décommentez pour exécuter
