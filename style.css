@@ -194,6 +194,7 @@ nav a:hover {
 }
 
 .slogan-banner h2 {
+    color: var(--color-white);
     margin: 0;
     font-size: 2rem;
     font-style: italic;
