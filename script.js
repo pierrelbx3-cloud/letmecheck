@@ -119,7 +119,7 @@ async function filterModelsByTcHolder() {
     // NOTE: Ceci suppose que la table 'type_avion' a une colonne 'tc_holder' pour le filtrage
     // S'ils sont liés par une autre table ou une clé, cette requête doit être ajustée.
     const { data: models, error: modelError } = await supabase
-        .from('aircrafts') // Supposons que les modèles et TC Holder sont ici
+        .from('type_avion') // Supposons que les modèles et TC Holder sont ici
         .select('model', { distinct: true }) // Assurez-vous d'utiliser le nom de colonne correct
         .eq('tc_holder', tcHolder) // Appliquer le filtre
         .order('model');
