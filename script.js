@@ -108,7 +108,7 @@ async function handleSearch(event) {
     const endTimestamp = `${endDate}T23:59:59.999Z`; // Fin de journée pour inclure tout le dernier jour
 
     // Appel à la fonction RPC PostgreSQL (moteur de recherche)
-    const { data, error } = await supabase.rpc('search_available_slot', {
+    const { data, error } = await supabase.rpc('search_available_slots', {
         p_aircraft_id: parseInt(aircraftId), // Convertir en nombre si nécessaire
         p_service_id: parseInt(serviceId),   // Convertir en nombre si nécessaire
         p_start_date: startTimestamp,
