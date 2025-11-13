@@ -63,7 +63,7 @@ async function loadDropdowns() {
     
     const { data: services, error: serviceError } = await supabase
         .from('services') 
-        .select('id_service, type_service'); // Colonnes de votre table
+        .select('id_service, description'); // Colonnes de votre table
 
     if (serviceError) console.error("Erreur chargement Services:", serviceError);
 
@@ -75,7 +75,7 @@ async function loadDropdowns() {
         services.forEach(s => {
             const option = document.createElement('option');
             option.value = s.id_service;
-            option.textContent = s.type_service;
+            option.textContent = s.description;
             select.appendChild(option);
         });
     }
