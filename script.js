@@ -143,7 +143,7 @@ async function loadServices() {
     }
 }
 // =================================================================
-// 4. GESTIONNAIRE DE RECHERCHE (APPEL RPC) - À DÉBOGUER
+// 4. GESTIONNAIRE DE RECHERCHE (APPEL RPC) - CORRIGÉ
 // =================================================================
 
 async function handleSearch(event) {
@@ -151,34 +151,34 @@ async function handleSearch(event) {
     const output = document.getElementById('results-output');
     output.innerHTML = '<p>Recherche en cours...</p>';
 
-    // ... (Récupération des valeurs du formulaire)
+    // 🚨 ASSUREZ-VOUS QUE CES LIGNES SONT BIEN DANS LA FONCTION :
+    const tcHolder = document.getElementById('tc-holder-select').value;
+    const model = document.getElementById('model-select').value; 
+    const serviceId = document.getElementById('service-select').value;
+    const startDate = document.getElementById('start-date').value;
+    const endDate = document.getElementById('end-date').value;
+    // -------------------------------------------------------------------
 
+    // La ligne 156 dans votre code doit être la suivante (ou très proche) :
     if (!tcHolder || !model || !serviceId || !startDate || !endDate) {
-        // ... (message d'erreur)
+    // ^-- C'est ici que l'erreur se produit si 'tcHolder' n'est pas déclaré plus haut.
+        output.innerHTML = '<p style="color: orange;">Veuillez remplir tous les champs avant de lancer la recherche.</p>';
         return;
     }
     
     const startTimestamp = `${startDate}T00:00:00.000Z`;
     const endTimestamp = `${endDate}T23:59:59.999Z`;
 
-    // 🚨 AJOUTEZ CECI POUR DÉBOGUER 🚨
-    console.log("--- Données envoyées à RPC ---");
-    console.log(`TC Holder: ${tcHolder} (Type: ${typeof tcHolder})`);
-    console.log(`Model: ${model} (Type: ${typeof model})`);
-    console.log(`Service ID: ${parseInt(serviceId)}`);
-    console.log(`Start Date: ${startTimestamp}`);
-    console.log("----------------------------");
+    // ... (Reste du code, y compris l'appel console.log si vous faites du débogage)
 
-    // Appel à la fonction RPC PostgreSQL.
     const { data, error } = await supabase.rpc('search_available_slots', {
-        p_tc_holder: tcHolder,
+        p_tc_holder: tcHolder, // Utilisation de la variable déclarée
         p_model: model, 
-        p_service_id: parseInt(serviceId), // bigInt (nombre)
-        p_start_date: startTimestamp,
-        p_end_date: endTimestamp
+        // ...
     });
 
-    // ... (Reste de la fonction)
+    // ...
+}
 }
 // =================================================================
 // 5. AFFICHAGE DES RÉSULTATS (CORRIGÉ) 📊
