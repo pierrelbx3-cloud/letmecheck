@@ -1,0 +1,13 @@
+/* --- 0. General Styles --- */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: var(--color-text-main);
+    background-color: var(--color-background-light);
+}
+
+/* * NOTE : Les styles globaux pour h2, p, etc., sont intentionnellement
+ * retirés d'ici pour être placés dans leurs composants (BEM) 
+ * afin d'éviter les conflits.
+*/
