@@ -1,0 +1,39 @@
+/* --- 9. Customer Page Specifics --- */
+.customer-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 2rem;
+    background-color: var(--color-primary); 
+    color: var(--color-white); 
+}
+
+.customer-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.customer-hero p {
+    font-size: 1.3rem;
+    color: #f0f0f0;
+    margin-bottom: 2rem;
+}
+
+.cta-customer {
+    background-color: var(--color-white);
+    color: var(--color-primary);
+}
+.cta-customer:hover {
+    background-color: #f0f0f0;
+    color: var(--color-secondary);
+}
+
+.step-grid {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
