@@ -6,7 +6,8 @@ const SUPABASE_URL = 'https://nsbbemlzhpyngeorvrrk.supabase.co'; 
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5zYmJlbWx6aHB5bmdlb3J2cnJrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjEyMDA0OTEsImV4cCI6MjA3Njc3NjQ5MX0.5MhJ98Q8SJQ3OwvzZZ9xcsg8C9FdYrvnFcRdsfatC7A'; 
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-
+console.log("Clé Anon lue :", SUPABASE_ANON_KEY); 
+// Elle doit afficher la longue chaîne de caractères sans espaces autour.
 // =================================================================
 // 2. GESTION DES ÉVÉNEMENTS & INITIALISATION 🚀
 // =================================================================
