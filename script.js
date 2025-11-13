@@ -142,10 +142,8 @@ async function loadServices() {
         });
     }
 }
-
-
 // =================================================================
-// 4. GESTIONNAIRE DE RECHERCHE (APPEL RPC CORRIGÉ) 🔍
+// 4. GESTIONNAIRE DE RECHERCHE (APPEL RPC) - À DÉBOGUER
 // =================================================================
 
 async function handleSearch(event) {
@@ -153,39 +151,34 @@ async function handleSearch(event) {
     const output = document.getElementById('results-output');
     output.innerHTML = '<p>Recherche en cours...</p>';
 
-    // Récupération des valeurs
-    const tcHolder = document.getElementById('tc-holder-select').value;
-    const model = document.getElementById('model-select').value; 
-    const serviceId = document.getElementById('service-select').value;
-    const startDate = document.getElementById('start-date').value;
-    const endDate = document.getElementById('end-date').value;
+    // ... (Récupération des valeurs du formulaire)
 
-    // Validation des champs
     if (!tcHolder || !model || !serviceId || !startDate || !endDate) {
-        output.innerHTML = '<p style="color: orange;">Veuillez remplir tous les champs avant de lancer la recherche.</p>';
+        // ... (message d'erreur)
         return;
     }
     
     const startTimestamp = `${startDate}T00:00:00.000Z`;
     const endTimestamp = `${endDate}T23:59:59.999Z`;
 
+    // 🚨 AJOUTEZ CECI POUR DÉBOGUER 🚨
+    console.log("--- Données envoyées à RPC ---");
+    console.log(`TC Holder: ${tcHolder} (Type: ${typeof tcHolder})`);
+    console.log(`Model: ${model} (Type: ${typeof model})`);
+    console.log(`Service ID: ${parseInt(serviceId)}`);
+    console.log(`Start Date: ${startTimestamp}`);
+    console.log("----------------------------");
+
     // Appel à la fonction RPC PostgreSQL.
-    // L'ordre et les types des paramètres DOIVENT correspondre à la fonction SQL :
-    // (p_tc_holder text, p_model text, p_service_id bigint, p_start_date timestamp, p_end_date timestamp)
     const { data, error } = await supabase.rpc('search_available_slots', {
         p_tc_holder: tcHolder,
         p_model: model, 
-        p_service_id: parseInt(serviceId),
+        p_service_id: parseInt(serviceId), // bigInt (nombre)
         p_start_date: startTimestamp,
         p_end_date: endTimestamp
     });
 
-    if (error) {
-        output.innerHTML = `<p style="color: red;">Erreur SQL RPC : ${error.message}. Vérifiez la console pour les détails.</p>`;
-        console.error("Détails Erreur RPC:", error);
-    } else {
-        displayResults(data, output);
-    }
+    // ... (Reste de la fonction)
 }
 // =================================================================
 // 5. AFFICHAGE DES RÉSULTATS (CORRIGÉ) 📊
