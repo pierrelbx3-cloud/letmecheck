@@ -162,8 +162,6 @@ async function handleSearch(event) {
 console.log("TC Holder envoyé :", `'${tcHolder}'`);
 console.log("Modèle envoyé :", `'${model}'`);
 console.log("Service ID envoyé :", parseInt(serviceId));
-console.log(`Debut: ${startTimestamp}`); // '2025-11-16T00:00:00.000Z'
-console.log(`Fin: ${endTimestamp}`);
     
     if (!tcHolder || !model || !serviceId || !startDate || !endDate) {
         output.innerHTML = '<p style="color: orange;">Veuillez remplir tous les champs avant de lancer la recherche.</p>';
@@ -172,6 +170,8 @@ console.log(`Fin: ${endTimestamp}`);
     
     const startTimestamp = `${startDate}T00:00:00.000Z`;
     const endTimestamp = `${endDate}T23:59:59.999Z`;
+    console.log(`Debut: ${startTimestamp}`); // '2025-11-16T00:00:00.000Z'
+console.log(`Fin: ${endTimestamp}`);
 
     try {
         // 🚨 APPEL RPC ET ATTENTE DE LA RÉPONSE
