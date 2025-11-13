@@ -31,12 +31,18 @@
     <h2>✈️ Recherche de Disponibilités de Maintenance</h2>
     
     <form id="search-form" class="search-form-grid">
+
         <div class="form-step">
-            <label for="model-select">1. Modèle d'Avion :</label>
-            <select id="model-select" class="form-select" required>
-                <option value="">Sélectionner...</option>
-            </select>
-        </div>
+    <label for="tc-holder-select">TC Holder</label>
+    <select id="tc-holder-select" class="form-select">
+    </select>
+</div>
+<div class="form-step">
+    <label for="model-select">Modèle d'Avion</label>
+    <select id="model-select" class="form-select" disabled>
+        <option value="">Sélectionner d'abord un TC Holder</option>
+    </select>
+</div>
 
         <div class="form-step">
             <label for="service-select">2. Type de Service :</label>
