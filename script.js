@@ -205,3 +205,75 @@ function displayResults(data, outputElement) {
     html += '</tbody></table>';
     outputElement.innerHTML = html;
 }
+// --- NOUVELLE FONCTION : Filtrer les Services en fonction du Modèle d'Avion ---
+
+async function filterServicesByAircraft() {
+    const aircraftId = document.getElementById('model-select').value;
+    const serviceSelect = document.getElementById('service-select');
+
+    // Réinitialiser les options de service
+    serviceSelect.innerHTML = '<option value="">Sélectionner...</option>';
+
+    if (!aircraftId) {
+        return; // Rien à faire si aucun avion n'est sélectionné
+    }
+
+    // Requête Supabase pour trouver les Services COMPATIBLES avec ce Modèle d'Avion
+    // On utilise la table de jointure hangar_avion pour trouver les hangars compatibles,
+    // puis on joint à hangar_service pour trouver les services offerts par ces hangars.
+    
+    // NOTE: C'est une requête complexe qui pourrait nécessiter une fonction RPC dédiée
+    // pour de meilleures performances, mais faisons-le en deux étapes simples pour l'exemple.
+
+    // ÉTAPE 1: Trouver les HANGARS compatibles avec ce modèle
+    const { data: compatibleHangars, error: hgError } = await supabase
+        .from('hangar_avion')
+        .select('id_hangar')
+        .eq('id_type', aircraftId);
+        
+    if (hgError || !compatibleHangars || compatibleHangars.length === 0) {
+        console.warn("Aucun hangar compatible trouvé pour ce modèle.");
+        return;
+    }
+
+    const hangarIds = compatibleHangars.map(h => h.id_hangar);
+    
+    // ÉTAPE 2: Trouver les SERVICES offerts par ces hangars compatibles
+    const { data: compatibleServices, error: svError } = await supabase
+        .from('hangar_services')
+        .select(`
+            service_id,
+            services ( id, service_type )
+        `)
+        .in('hangar_id', hangarIds);
+
+    if (svError) {
+        console.error("Erreur lors du chargement des services compatibles:", svError);
+        return;
+    }
+
+    // Récupérer et dédoublonner les services
+    const uniqueServices = new Map();
+    compatibleServices.forEach(item => {
+        if (item.services) {
+            uniqueServices.set(item.services.id, item.services.service_type);
+        }
+    });
+
+    // Remplir la liste déroulante des services
+    uniqueServices.forEach((serviceName, serviceId) => {
+        const option = document.createElement('option');
+        option.value = serviceId;
+        option.textContent = serviceName;
+        serviceSelect.appendChild(option);
+    });
+}
+
+// --- AJOUTER L'ÉCOUTEUR À LA FONCTION loadDropdowns OU DOMContentLoaded ---
+
+document.addEventListener('DOMContentLoaded', () => {
+    // ... [le reste du code DOMContentLoaded] ...
+    
+    // AJOUTEZ CETTE LIGNE : 
+    document.getElementById('model-select').addEventListener('change', filterServicesByAircraft);
+});
