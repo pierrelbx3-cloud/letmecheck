@@ -25,7 +25,48 @@
             <a href="contact.html" class="btn btn-trial">Request trial</a> 
         </div>
     </header>
+    
+<section id="reservation-form-section">
+    <h2>Recherche de Disponibilités</h2>
+    <form id="search-form">
+        <div class="form-group">
+            <label for="model-select">1. Modèle d'Avion :</label>
+            <select id="model-select" required>
+                <option value="">Sélectionner...</option>
+                </select>
+        </div>
 
+        <div class="form-group">
+            <label for="service-select">2. Type de Service :</label>
+            <select id="service-select" required>
+                <option value="">Sélectionner...</option>
+                </select>
+        </div>
+
+        <div class="date-group">
+            <div class="form-group">
+                <label for="start-date">3. Date de Début :</label>
+                <input type="date" id="start-date" required>
+            </div>
+            <div class="form-group">
+                <label for="end-date">4. Date de Fin :</label>
+                <input type="date" id="end-date" required>
+            </div>
+        </div>
+
+        <button type="submit" id="search-button">Rechercher les Slots Disponibles</button>
+    </form>
+</section>
+
+<hr>
+
+<section id="results-area">
+    <h2>Résultats de la Recherche</h2>
+    <div id="results-output" class="console-output">
+        <p>Entrez vos critères de recherche ci-dessus.</p>
+    </div>
+</section>
+    
     <div class="query-tester-container">
         <h2>Supabase SQL Query Tester</h2>
         
