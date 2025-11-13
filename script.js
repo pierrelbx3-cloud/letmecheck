@@ -144,7 +144,7 @@ async function loadServices() {
     }
 }
 // =================================================================
-// 4. GESTIONNAIRE DE RECHERCHE (APPEL RPC) - CORRIGÉ
+// 4. GESTIONNAIRE DE RECHERCHE (VERSION FINALE AVEC GESTION D'ERREUR)
 // =================================================================
 
 async function handleSearch(event) {
@@ -152,17 +152,14 @@ async function handleSearch(event) {
     const output = document.getElementById('results-output');
     output.innerHTML = '<p>Recherche en cours...</p>';
 
-    // 🚨 ASSUREZ-VOUS QUE CES LIGNES SONT BIEN DANS LA FONCTION :
+    // Déclaration des variables (déjà présent dans votre code)
     const tcHolder = document.getElementById('tc-holder-select').value;
-    const model = document.getElementById('model-select').value; 
+    const model = document.getElementById('model-select').value; 
     const serviceId = document.getElementById('service-select').value;
     const startDate = document.getElementById('start-date').value;
     const endDate = document.getElementById('end-date').value;
-    // -------------------------------------------------------------------
 
-    // La ligne 156 dans votre code doit être la suivante (ou très proche) :
     if (!tcHolder || !model || !serviceId || !startDate || !endDate) {
-    // ^-- C'est ici que l'erreur se produit si 'tcHolder' n'est pas déclaré plus haut.
         output.innerHTML = '<p style="color: orange;">Veuillez remplir tous les champs avant de lancer la recherche.</p>';
         return;
     }
@@ -170,17 +167,30 @@ async function handleSearch(event) {
     const startTimestamp = `${startDate}T00:00:00.000Z`;
     const endTimestamp = `${endDate}T23:59:59.999Z`;
 
-    // ... (Reste du code, y compris l'appel console.log si vous faites du débogage)
+    try {
+        // 🚨 APPEL RPC ET ATTENTE DE LA RÉPONSE
+        const { data, error } = await supabase.rpc('search_available_slots', {
+            p_tc_holder: tcHolder,
+            p_model: model, 
+            p_service_id: parseInt(serviceId),
+            p_start_date_text: startTimestamp, 
+            p_end_date_text: endTimestamp      
+        });
 
-    const { data, error } = await supabase.rpc('search_available_slots', {
-    p_tc_holder: tcHolder,
-    p_model: model, 
-    p_service_id: parseInt(serviceId),
-    p_start_date_text: startTimestamp, // NOUVEAU
-    p_end_date_text: endTimestamp      // NOUVEAU
-    });
+        // 🚨 GESTION DE LA RÉPONSE DU SERVEUR
+        if (error) {
+            output.innerHTML = `<p style="color: red;">❌ Erreur SQL RPC : Code ${error.code} - ${error.message}</p>`;
+            console.error("Détails de l'erreur RPC retournée par le serveur:", error);
+        } else {
+            // ✅ SUCCÈS : Afficher les résultats
+            displayResults(data, output);
+        }
 
-    // ...
+    } catch (e) {
+        // Gestion des erreurs réseau ou JavaScript non gérées
+        output.innerHTML = `<p style="color: red;">❌ Erreur de connexion (Timeout ou autre). Voir la console.</p>`;
+        console.error("Erreur de connexion/timeout:", e);
+    }
 }
 // =================================================================
 // 5. AFFICHAGE DES RÉSULTATS (CORRIGÉ) 📊
