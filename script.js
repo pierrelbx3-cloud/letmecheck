@@ -174,6 +174,8 @@ async function handleSearch(event) {
     const { data, error } = await supabase.rpc('search_available_slots', {
         p_tc_holder: tcHolder, // Utilisation de la variable déclarée
         p_model: model, 
+        p_start_date_text: startTimestamp, // NOUVEAU NOM DE PARAMÈTRE
+    p_end_date_text: endTimestamp
         // ...
     });
 
