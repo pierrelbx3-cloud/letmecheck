@@ -1,0 +1,16 @@
+:root {
+    /* --- Couleurs Primaires (Basées sur votre design LMC) --- */
+    --color-primary: #1d1f24;     /* Bleu LMC principal */
+    --color-secondary: #2b3240;   /* Bleu LMC foncé (pied de page, titres) */
+    --color-text-main: #333;      /* Texte général */
+    --color-background-light: #f4f4f9; /* Fond des pages */
+    --color-white: #ffffff;
+    
+    /* --- Tailles de Police de Base --- */
+    --font-size-base: 1rem;
+    --font-size-large: 1.2rem;
+    
+    /* --- Espacements --- */
+    --spacing-default: 1rem;
+    --spacing-large: 2rem;
+}
