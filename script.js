@@ -223,8 +223,6 @@ function displayResults(data, outputElement) {
                 <tr>
                     <th>Hangar</th>
                     <th>Ville</th>
-                    <th>Type de Slot</th>
-                    <th>Agrément</th>
                     <th>ID Slot</th>
                 </tr>
             </thead>
@@ -236,7 +234,6 @@ function displayResults(data, outputElement) {
             <tr>
                 <td>${item.nom_hangar}</td> 
                 <td>${item.ville}</td>
-                <td>${item.slot_type}</td>
                 <td>${item.slot_id}</td>
             </tr>
         `;
