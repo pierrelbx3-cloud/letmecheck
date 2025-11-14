@@ -7,6 +7,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 console.log("Clé Anon lue :", SUPABASE_ANON_KEY); 
+console.log("Objet Supabase créé:", supabase);
 // Elle doit afficher la longue chaîne de caractères sans espaces autour.
 // =================================================================
 // 2. GESTION DES ÉVÉNEMENTS & INITIALISATION 🚀
