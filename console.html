@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-R">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="favicon.png">
-    <title>LMC - For MRO Suppliers</title>
+    <title>LMC - Supabase Query Tester</title>
     <link rel="stylesheet" href="./css/main.css">
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="console.js"></script>
-</head>
+    </head>
 <body>
 
     <header>
@@ -19,7 +17,7 @@
         <nav>
             <ul>
                 <li><a href="customer.html">For Customer</a></li>
-                <li><a href="mro.html">For MRO</a></li> <li>
+                <li><a href="mro.html">For MRO</a></li> 
                 <li><a href="contact.html">Contact</a></li>
             </ul>
         </nav>
@@ -30,12 +28,12 @@
         </div>
     </header>
 
-   <div class="query-tester-container">
+    <div class="query-tester-container">
         <h2>Supabase SQL Query Tester</h2>
         
         <form id="query-form">
             <label for="sql-query">Enter SQL Query (Postgres/Supabase):</label>
-            <textarea id="sql-query" placeholder="Ex: SELECT * FROM your_table WHERE id = 1;"></textarea>
+            <textarea id="sql-query" placeholder="Ex: SELECT * FROM your_table LIMIT 5;"></textarea>
             
             <button type="submit" class="btn-execute">Execute Query</button>
         </form>
@@ -48,9 +46,13 @@
             </pre>
         </div>
     </div>
-<footer>
+    
+    <footer>
         <p>&copy; 2025 LMC. All rights reserved.</p>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="console.js"></script>
 
 </body>
 </html>
