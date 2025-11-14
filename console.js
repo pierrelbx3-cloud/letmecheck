@@ -1,7 +1,4 @@
-// Remplacez ces valeurs par VOS clés Supabase
-// **ATTENTION :** Ces clés (anon public key) sont visibles par l'utilisateur final 
-// et doivent être utilisées pour des opérations de "lecture" sécurisées.
-// Pour les opérations sensibles, utilisez des fonctions Edge ou le serveur.
+
 const SUPABASE_URL = 'VOTRE_URL_SUPABASE_ICI'; // Ex: 'https://xyz123abc.supabase.co'
 const SUPABASE_ANON_KEY = 'VOTRE_CLE_ANON_PUBLIQUE_ICI'; 
 
