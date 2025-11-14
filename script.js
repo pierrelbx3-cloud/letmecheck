@@ -236,7 +236,57 @@ function displayResults(data, outputElement) {
             </tr>
         `;
     });
+// Assurez-vous d'avoir accès à l'objet 'supabase' initialisé.
 
+document.getElementById('query-form').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const resultsOutput = document.getElementById('results-output');
+    const errorDisplay = document.getElementById('error-display');
+    
+    // Le code à exécuter : ici, on exécute l'appel RPC
+    const query = document.getElementById('sql-query').value.trim();
+
+    resultsOutput.textContent = '[ Exécution de la requête... ]';
+    errorDisplay.style.display = 'none';
+
+    // Les valeurs que vous souhaitez tester (issues de la zone de texte si elles sont formatées en JSON, ou des valeurs fixes pour le test)
+    const TC_HOLDER = 'ACC COLUMBIA JET SERVICE GMBH';
+    const MODEL = 'AS202/15';
+    const SERVICE_ID = 1;
+    const START_DATE = '2025-11-15T00:00:00.000Z';
+    const END_DATE = '2025-11-16T23:59:59.999Z';
+    
+    try {
+        const { data, error } = await supabase.rpc('search_available_slots', {
+            p_tc_holder: TC_HOLDER,
+            p_model: MODEL,
+            p_service_id: SERVICE_ID,
+            p_start_date_text: START_DATE,
+            p_end_date_text: END_DATE
+        });
+
+        if (error) {
+            errorDisplay.textContent = `❌ Erreur SQL RPC (Code ${error.code}): ${error.message}`;
+            errorDisplay.style.display = 'block';
+            resultsOutput.textContent = '';
+            console.error("Détails de l'erreur RPC:", error);
+            return;
+        }
+
+        if (data && data.length > 0) {
+            // Affichage du résultat dans le format le plus simple et lisible
+            resultsOutput.textContent = JSON.stringify(data, null, 2);
+        } else {
+            resultsOutput.textContent = '[ 0 rows returned (Aucun slot trouvé pour ces critères) ]';
+        }
+
+    } catch (e) {
+        errorDisplay.textContent = `Erreur de connexion JavaScript: ${e.message}`;
+        errorDisplay.style.display = 'block';
+        console.error("Erreur de connexion:", e);
+    }
+});
     html += '</tbody></table>';
     outputElement.innerHTML = html;
 }
