@@ -204,5 +204,5 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // Test de connexion initial : Lecture de la table 'hangars' au chargement
-    fetchTableData('hangars', 'id, nom_hangar').then(displayResult);
+    fetchTableData('hangars', 'nom_hangar').then(displayResult);
 });
